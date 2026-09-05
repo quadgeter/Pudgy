@@ -28,8 +28,8 @@ for full current architecture.
       in the spec doc). 42 tests passing (33 rule tests + 9 property tests).
 
 ### Provider adapters (in `apps/api`)
-- [ ] `providers/providerAdapter.ts` — interface
-- [ ] `providers/plaidAdapter.ts` — start with hardcoded fake data, no real Plaid calls yet
+- [x] `providers/providerAdapter.ts` — interface
+- [x] `providers/plaidAdapter.ts` — start with hardcoded fake data, no real Plaid calls yet
 - [ ] `providers/simpleFinAdapter.ts` — same, fake data first
 - [ ] `services/accountSyncService.ts` — orchestrates adapters
 
