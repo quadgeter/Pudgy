@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "tsx watch src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -19,6 +20,8 @@
   "packageManager": "pnpm@11.25.0",
   "type": "module",
   "dependencies": {
+    "@hono/node-server": "^2.1.1",
+    "@hono/trpc-server": "^0.4.2",
     "@pudgy/shared": "workspace:*",
     "@trpc/server": "^11.18.0",
     "hono": "^4.13.5",

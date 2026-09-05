@@ -2,20 +2,22 @@
 
 ## Status
 
-Shared model types and first domain function (`monthlySpend`) implemented and tested. Monorepo
-scaffold in place. Architecture is a separate backend + frontend monorepo (see decision log).
-Data model itself is unchanged in substance — see pudgy.md for full current architecture.
+Shared model types and first domain function (`monthlySpend`) implemented and tested. Full
+monorepo scaffold complete — Hono + tRPC backend with health-check, SvelteKit frontend with tRPC
+client, end-to-end type inference working, PWA configured. Architecture is a separate backend +
+frontend monorepo (see decision log). Data model itself is unchanged in substance — see pudgy.md
+for full current architecture.
 
 ## TODO
 
 ### Scaffolding
-- [ ] Set up pnpm workspace (`pnpm-workspace.yaml`, root `package.json`)
-- [ ] `packages/shared` — init package, TypeScript config
-- [ ] `apps/api` — init Hono app, add tRPC, confirm a health-check procedure responds
-- [ ] `apps/web` — init SvelteKit app (frontend only), add tRPC client pointed at `apps/api`
-- [ ] Confirm end-to-end type inference works: a type change in `packages/shared` should show up
+- [x] Set up pnpm workspace (`pnpm-workspace.yaml`, root `package.json`)
+- [x] `packages/shared` — init package, TypeScript config
+- [x] `apps/api` — init Hono app, add tRPC, confirm a health-check procedure responds
+- [x] `apps/web` — init SvelteKit app (frontend only), add tRPC client pointed at `apps/api`
+- [x] Confirm end-to-end type inference works: a type change in `packages/shared` should show up
       as a type error in both apps without any manual sync step
-- [ ] Install and configure `vite-plugin-pwa` in `apps/web` (manifest, service worker,
+- [x] Install and configure `vite-plugin-pwa` in `apps/web` (manifest, service worker,
       install-to-home-screen)
 
 ### Shared model layer
@@ -87,6 +89,13 @@ Data model itself is unchanged in substance — see pudgy.md for full current ar
   is actually decided — right now the whole schema assumes a single user.
 
 ## Recent decisions
+
+**2026-09-05 — Scaffolding complete.** Backend (`apps/api`) running Hono + tRPC with a `health`
+query on port 3001, using `@hono/trpc-server` middleware and `@hono/node-server`. Frontend
+(`apps/web`) has a tRPC proxy client importing `AppRouter` type from the backend (type-only,
+no runtime dependency). PWA configured via `@vite-pwa/sveltekit` with placeholder icons —
+real icons deferred to UI design phase. CORS is wide-open for dev; will be tightened when real
+domains are known (tracked in Deployment section above).
 
 **2026-09-01 — `monthlySpend` spec finalized; three open questions resolved.** First domain
 spec written (pure function in `packages/shared`, see pudgy.md's "Domain logic" section for
